@@ -48,7 +48,7 @@ function Modal({ open, setOpen, data, countries }) {
         iso: data?.iso,
       });
     }
-  }, [data?.type]);
+  }, [data?.type, data?.name, data?.telp, data?.iso]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -142,7 +142,12 @@ function Modal({ open, setOpen, data, countries }) {
                   return (
                     <MenuItem value={data.alpha2Code} key={index}>
                       <Box sx={{ display: "flex" }}>
-                        <Image src={data?.flags.svg} height="20" width="30" />
+                        <Image
+                          src={data?.flags.svg}
+                          height="20"
+                          width="30"
+                          alt="flag of country"
+                        />
                         <Typography ml={1}>{data?.name}</Typography>
                       </Box>
                     </MenuItem>

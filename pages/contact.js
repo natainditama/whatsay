@@ -83,7 +83,7 @@ export default function Contacts({ countries }) {
       <List>
         {!contactList.length && (
           <Typography pt={12} align="center" color="info">
-            You don't have any contact yet.
+            You don{"'"}t have any contact yet{"."}
           </Typography>
         )}
         {contactList.map((data, index) => {

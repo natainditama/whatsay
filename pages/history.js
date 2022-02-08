@@ -84,7 +84,7 @@ function History() {
       </Stack>
       {historyList.length === 0 && (
         <Typography pt={12} align="center" color="info">
-          You don't have any history yet.
+          You don{"'"}t have any history yet{"."}
         </Typography>
       )}
       {historyList.map((list, index) => {
