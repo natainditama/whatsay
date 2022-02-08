@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
   Button,
-  Stack,
   Grid,
   InputAdornment,
   CircularProgress,
@@ -17,6 +16,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { addHistories } from "@redux/features/historySlice";
@@ -24,7 +24,7 @@ import { addHistories } from "@redux/features/historySlice";
 export default function Home({ countries }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const countryList = useMemo(() => countries, []);
+  const countryList = useMemo(() => countries, [countries]);
   const [error, setError] = useState({});
 
   const [temp, setTemp] = useState({
@@ -132,6 +132,7 @@ export default function Home({ countries }) {
                               src={data?.flags.svg}
                               height="20"
                               width="30"
+                              alt={`flage ${data?.name}`}
                             />
                             <Typography ml={1}>{data?.name}</Typography>
                           </Box>

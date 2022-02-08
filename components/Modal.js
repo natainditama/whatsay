@@ -24,7 +24,7 @@ function Modal({ open, setOpen, data, countries }) {
   const dispatch = useDispatch();
   const [temp, setTemp] = useState({ name: "", iso: "", telp: "" });
   const [error, setError] = useState({ name: "", iso: "", telp: "" });
-  const countryList = useMemo(() => countries, []);
+  const countryList = useMemo(() => countries, [countries]);
   const handleChange = ({ target }) => {
     setTemp({ ...temp, [target?.id ?? "iso"]: target.value });
   };
