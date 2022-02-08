@@ -15,66 +15,103 @@ import {
   FormHelperText,
   MenuItem,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState, useMemo } from "react";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addHistories } from "@redux/features/historySlice";
+import { parsePhoneNumber } from "libphonenumber-js";
 
 export default function Home({ countries }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const countryList = useMemo(() => countries, [countries]);
-  const [error, setError] = useState({});
+
+  const [error, setError] = useState({
+    telphone: "",
+    iso: "",
+    messages: "",
+  });
 
   const [temp, setTemp] = useState({
     telphone: "",
     messages: "",
+    iso: "",
     isLoading: false,
   });
 
   const handleChange = ({ target }) => {
-    setTemp({ ...temp, [target.id]: target.value });
+    setTemp({ ...temp, [target?.id ?? "iso"]: target.value });
+  };
+
+  const validatePhone = () => {
+    if (!router.query.to) {
+      try {
+        const parsed = parsePhoneNumber(temp.telphone, temp.iso);
+        if (!parsed.isValid()) {
+          setError({
+            ...error,
+            telphone: "This phone number is invalid",
+          });
+          return false;
+        } else {
+          setError({
+            ...error,
+            telphone: "",
+          });
+          return true;
+        }
+      } catch (err) {
+        const text = err.message.toString().toLowerCase().split("_");
+        const message = text.join(" ");
+        setError({
+          ...error,
+          telphone: `This phone number is ${message}`,
+        });
+        return false;
+      }
+    } else {
+      return true;
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!temp.telphone) {
-      setError({ ...error, telphone: "This field is required" });
-      return;
+    const validationPhone = validatePhone();
+    if (validationPhone) {
+      setTemp({
+        ...temp,
+        isLoading: true,
+      });
+      setTimeout(() => {
+        if (typeof window != undefined) {
+          const phone =
+            router.query?.to ??
+            parsePhoneNumber(temp.telphone, temp.iso).formatInternational();
+          dispatch(
+            addHistories({
+              ...temp,
+              createAt: `${new Date()}`,
+              telphone: decodeURI(router.query?.to) ?? phone,
+            })
+          );
+          window.open(
+            `https://api.whatsapp.com/send?phone=${phone}&text=${temp.messages
+              .split("\n")
+              .join("%0a")}&source=&data`,
+            "_blank"
+          );
+          setTemp({ telphone: "", messages: "", isLoading: false });
+          setError({});
+        }
+      }, 2000);
     }
-    if (!temp.messages) {
-      setError({ ...error, messages: "This field is required" });
-      return;
-    }
-    setTemp({
-      ...temp,
-      isLoading: true,
-    });
-    setTimeout(() => {
-      dispatch(addHistories({ ...temp, createAt: new Date() }));
-      if (typeof window != undefined) {
-        window.open(
-          `https://api.whatsapp.com/send?phone=${
-            temp.telphone
-          }&text=${temp.messages.split("\n").join("%0a")}&source=&data`,
-          "_blank"
-        );
-        setTemp({ telphone: "", messages: "", isLoading: false });
-        setError({});
-      }
-    }, 2000);
   };
 
   return (
     <Box>
       <Metadata />
-      <Box
-        component={`form`}
-        autoComplete="off"
-        noValidate
-        onSubmit={handleSubmit}
-      >
+      <Box component={`form`} autoComplete="off" onSubmit={handleSubmit}>
         <Grid container rowSpacing={2}>
           <Grid item xs={12}>
             <Typography>
@@ -83,67 +120,74 @@ export default function Home({ countries }) {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={7}>
-                <TextField
-                  id="telphone"
-                  name="telphone"
-                  error={Boolean(error.telphone)}
-                  helperText={error.telphone}
-                  onChange={handleChange}
-                  fullWidth
-                  value={temp.telphone}
-                  required
-                  label="Phone Number"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <FontAwesomeIcon icon={faPhone} />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} md={5}>
-                <FormControl
-                  variant="outlined"
-                  error={Boolean(error.iso)}
-                  fullWidth
-                >
-                  <InputLabel id="iso">Country</InputLabel>
-                  <Select
-                    labelId="iso"
-                    id="iso"
-                    inputProps={{
-                      required: true,
-                    }}
-                    value={temp.iso ?? ""}
-                    onChange={handleChange}
-                    label="Country"
+            {!router.query.to && (
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={5}>
+                  <FormControl
+                    variant="outlined"
+                    error={Boolean(error.iso)}
+                    fullWidth
                   >
-                    <MenuItem value="" disabled>
-                      <em>None</em>
-                    </MenuItem>
-                    {countryList.map((data, index) => {
-                      return (
-                        <MenuItem value={data.alpha2Code} key={index}>
-                          <Box sx={{ display: "flex" }}>
-                            <Image
-                              src={data?.flags.svg}
-                              height="20"
-                              width="30"
-                              alt={`flage ${data?.name}`}
-                            />
-                            <Typography ml={1}>{data?.name}</Typography>
-                          </Box>
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  <FormHelperText>{error.iso}</FormHelperText>
-                </FormControl>
+                    <InputLabel id="iso">Country</InputLabel>
+                    <Select
+                      labelId="iso"
+                      id="iso"
+                      inputProps={{
+                        required: true,
+                      }}
+                      value={temp.iso ?? ""}
+                      onChange={handleChange}
+                      label="Country"
+                    >
+                      <MenuItem value="" disabled>
+                        <em>None</em>
+                      </MenuItem>
+                      {countryList.map((data, index) => {
+                        return (
+                          <MenuItem value={data.alpha2Code} key={index}>
+                            <Box sx={{ display: "flex" }}>
+                              <Image
+                                src={data?.flags.svg}
+                                height="20"
+                                width="30"
+                                alt={`flage ${data?.name}`}
+                              />
+                              <Typography ml={1}>{data?.name}</Typography>
+                            </Box>
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                    <FormHelperText>{error.iso}</FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={7}>
+                  <TextField
+                    id="telphone"
+                    name="telphone"
+                    error={Boolean(error.telphone)}
+                    helperText={error.telphone}
+                    onChange={handleChange}
+                    fullWidth
+                    value={temp.telphone}
+                    required
+                    label="Phone Number"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <FontAwesomeIcon icon={faPhone} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+            )}
+            {router.query.to && (
+              <Typography variant="subtitle1">
+                to : <b>{decodeURI(router.query.to)}</b>
+              </Typography>
+            )}
           </Grid>
           <Grid item xs={12}>
             <TextField

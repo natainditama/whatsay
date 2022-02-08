@@ -16,6 +16,7 @@ import {
   styled,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchHistories, resetHistories } from "@redux/features/historySlice";
 
@@ -29,6 +30,7 @@ const StyledAccordion = styled((props) => (
 }));
 
 function History() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const historyList = useSelector(({ history }) => history.histories);
   const [expanded, setExpanded] = useState(false);
@@ -37,7 +39,10 @@ function History() {
 
   useEffect(() => {
     dispatch(fetchHistories());
-  }, [dispatch]);
+    if (agree) {
+      dispatch(resetHistories());
+    }
+  }, [dispatch, agree]);
 
   const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -50,7 +55,10 @@ function History() {
         open={open}
         setOpen={setOpen}
         setAgree={setAgree}
-        data={{ title: "Are you sure ?", text: "ahdkjadkj" }}
+        data={{
+          title: "Are you sure want to delete all of your history?",
+          text: "You can't undo this action. All of your history will be deleted. Are you sure?",
+        }}
       />
       <Stack
         direction="row"
@@ -66,27 +74,29 @@ function History() {
         </Typography>
         <Button
           color="error"
+          disabled={historyList.length === 0}
           onClick={() => {
             setOpen(true);
-            if (agree) {
-              dispatch(resetHistories());
-            }
           }}
         >
           Delete Histories
         </Button>
       </Stack>
+      {historyList.length === 0 && (
+        <Typography pt={12} align="center" color="info">
+          You don't have any history yet.
+        </Typography>
+      )}
       {historyList.map((list, index) => {
         return (
-          <>
+          <Box key={index}>
             <StyledAccordion
-              sx={{ boxShadow: 0, bt: "none" }}
               disableGutters
               expanded={expanded === index}
               onChange={handleChange(index)}
             >
               <AccordionSummary
-                sx={{ pl: 0, bgColor: "red !important" }}
+                sx={{ pl: 0 }}
                 expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
@@ -94,7 +104,16 @@ function History() {
                 <ListItem
                   sx={{ p: 0 }}
                   secondaryAction={
-                    <IconButton color="primary" size="large">
+                    <IconButton
+                      color="primary"
+                      size="large"
+                      onClick={() =>
+                        router.push({
+                          pathname: "/",
+                          query: { to: list.telphone },
+                        })
+                      }
+                    >
                       <i className="fab fa-whatsapp"></i>
                     </IconButton>
                   }
@@ -120,7 +139,7 @@ function History() {
               </AccordionDetails>
             </StyledAccordion>
             <Divider />
-          </>
+          </Box>
         );
       })}
     </Box>

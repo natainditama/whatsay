@@ -39,9 +39,17 @@ export default function Contacts({ countries }) {
         data={dataModal}
         countries={countries}
       />
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ pt: 2 }}
+      >
         <Typography color="primary" variant="h5">
           My Contacts
+          <Typography color="text.primary" variant="body2">
+            List your contacts here
+          </Typography>
         </Typography>
         <Button
           variant="outlined"
@@ -56,8 +64,28 @@ export default function Contacts({ countries }) {
           Add New Contact
         </Button>
       </Stack>
+
+      {/* <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography color="primary" variant="h5"></Typography>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setOpen(true);
+            setDataModal({
+              title: "Add Contact",
+              type: "add",
+            });
+          }}
+        >
+          Add New Contact
+        </Button>
+      </Stack> */}
       <List>
-        {!contactList.length && <h1>Tolol</h1>}
+        {!contactList.length && (
+          <Typography pt={12} align="center" color="info">
+            You don't have any contact yet.
+          </Typography>
+        )}
         {contactList.map((data, index) => {
           return (
             <ListItem
@@ -133,7 +161,9 @@ export async function getServerSideProps() {
   try {
     const res = await fetch(`https://restcountries.com/v2/all`);
     const countries = await res.json();
-    return { props: { countries } };
+    return {
+      props: { countries },
+    };
   } catch (error) {
     console.log(error);
     return { props: { countries: [] } };
