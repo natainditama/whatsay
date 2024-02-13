@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  contacts: [],
+};
+
 export const contactSlice = createSlice({
   name: "contact",
-  initialState: {
-    contacts: [],
-  },
+  initialState,
   reducers: {
     getAllContact: (state) => {
       if (typeof window != undefined) {

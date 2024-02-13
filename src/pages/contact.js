@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { faPen, faTrashAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
-import { deleteContact, getAllContact } from "@redux/features/contactSlice";
 import {
+  Avatar,
   Box,
-  Stack,
-  Typography,
   Button,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
-  Avatar,
-  IconButton,
   ListItemText,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { Modal, Metadata } from "@components/index";
 import { parsePhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Modal } from "@/components/index";
+import { deleteContact, getAllContact } from "@/redux/slices";
 
 export default function Contacts({ countries }) {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ export default function Contacts({ countries }) {
 
   return (
     <Box>
-      <Metadata title="Contact" />
       <Modal
         open={open}
         setOpen={setOpen}
@@ -125,8 +125,8 @@ export default function Contacts({ countries }) {
                           to: encodeURI(
                             parsePhoneNumber(
                               data.telp,
-                              data.iso
-                            ).formatInternational()
+                              data.iso,
+                            ).formatInternational(),
                           ),
                         },
                       });
@@ -146,7 +146,7 @@ export default function Contacts({ countries }) {
                 primary={data?.name}
                 secondary={parsePhoneNumber(
                   data?.telp,
-                  data?.iso
+                  data?.iso,
                 ).formatInternational()}
               />
             </ListItem>

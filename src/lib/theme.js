@@ -1,6 +1,6 @@
 import { colors } from "@mui/material";
 
-export const getDesign = ({ mode }) => ({
+export const getDesignTokens = ({ mode }) => ({
   palette: {
     mode,
     ...(mode == "light"
@@ -14,24 +14,21 @@ export const getDesign = ({ mode }) => ({
             main: colors.common.white,
           },
         }
-      : custom),
+      : {
+          primary: {
+            main: "#00AC47",
+            dark: "#00AC47",
+            light: "#00AC47",
+          },
+          secondary: {
+            main: colors.common.white,
+          },
+        }),
   },
   typography: {
     fontFamily: `'Inter', sans-serif`,
-    fontWeightLight: 400,
     button: {
       textTransform: "none",
     },
   },
 });
-
-const custom = {
-  primary: {
-    main: "#00AC47",
-    dark: "#00AC47",
-    light: "#00AC47",
-  },
-  secondary: {
-    main: colors.common.white,
-  },
-};

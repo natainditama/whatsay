@@ -1,25 +1,23 @@
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   AppBar,
-  Toolbar,
-  Box,
-  Typography,
-  IconButton,
-  styled,
-  Stack,
   Container,
+  IconButton,
+  Stack,
+  styled,
+  Toolbar,
+  Typography,
   useTheme,
-  useMediaQuery,
 } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { setMode } from "@redux/features/modeSlice";
 import { useDispatch } from "react-redux";
-import { Navbar } from "@components/index";
 
-function Header() {
+import { Navbar } from "@/components/index";
+import { setMode } from "@/redux/slices";
+
+export function Header() {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const isDesktopMatches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleTheme = () => {
     dispatch(setMode(theme.palette.mode == "dark" ? "light" : "dark"));
@@ -30,15 +28,14 @@ function Header() {
     justifyContent: "center",
     alignItems: "flex-start",
     paddingTop: theme.spacing(1.5),
-    paddingBottom: isDesktopMatches ? 0 : theme.spacing(1),
     "@media all": {
       minHeight: "min-content",
     },
   }));
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ boxShadow: 1 }} enableColorOnDark>
+    <>
+      <AppBar position="static" sx={{ boxShadow: 0 }} enableColorOnDark>
         <Container maxWidth="sm">
           <StyledToolbar disableGutters>
             <Stack
@@ -49,7 +46,7 @@ function Header() {
                 width: "100%",
               }}
             >
-              <Typography variant="h5">WhatsMe</Typography>
+              <Typography variant="h5">Whatsay</Typography>
               <IconButton
                 size="large"
                 aria-label="search"
@@ -67,8 +64,6 @@ function Header() {
           </StyledToolbar>
         </Container>
       </AppBar>
-    </Box>
+    </>
   );
 }
-
-export default Header;

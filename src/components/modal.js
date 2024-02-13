@@ -1,26 +1,27 @@
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  FormHelperText,
   Box,
-  TextField,
-  DialogActions,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
+  FormHelperText,
   InputLabel,
-  Select,
   MenuItem,
+  Select,
+  TextField,
   Typography,
 } from "@mui/material";
-import { useMemo, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addContact, editContact } from "@redux/features/contactSlice";
-import { v4 as uuidv4 } from "uuid";
-import Image from "next/image";
 import { parsePhoneNumber } from "libphonenumber-js";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-function Modal({ open, setOpen, data, countries }) {
+import { addContact, editContact } from "@/redux/slices";
+
+export function Modal({ open, setOpen, data, countries }) {
   const dispatch = useDispatch();
   const [temp, setTemp] = useState({ name: "", iso: "", telp: "" });
   const [error, setError] = useState({ name: "", iso: "", telp: "" });

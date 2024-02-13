@@ -1,24 +1,25 @@
-import { Metadata, Confirm } from "@components/index";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography,
   Box,
+  Button,
+  Divider,
+  IconButton,
   ListItem,
   ListItemText,
-  IconButton,
-  Divider,
   Stack,
-  Button,
   styled,
+  Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchHistories, resetHistories } from "@redux/features/historySlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Confirm } from "@/components/index";
+import { fetchHistories, resetHistories } from "@/redux/slices";
 
 const StyledAccordion = styled((props) => (
   <Accordion disableGutters elevation={0} {...props} />
@@ -29,7 +30,7 @@ const StyledAccordion = styled((props) => (
   },
 }));
 
-function History() {
+export default function History() {
   const router = useRouter();
   const dispatch = useDispatch();
   const historyList = useSelector(({ history }) => history.histories);
@@ -50,7 +51,6 @@ function History() {
 
   return (
     <Box>
-      <Metadata title={"History"} />
       <Confirm
         open={open}
         setOpen={setOpen}
@@ -145,5 +145,3 @@ function History() {
     </Box>
   );
 }
-
-export default History;

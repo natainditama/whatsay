@@ -1,37 +1,10 @@
-import {
-  Box,
-  Tabs,
-  Tab,
-  Stack,
-  useTheme,
-  useMediaQuery,
-  Typography,
-} from "@mui/material";
-import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faHistory, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
-const NavList = [
-  {
-    name: "Home",
-    path: "/",
-    icon: faHome,
-  },
-  {
-    name: "History",
-    path: "/history",
-    icon: faHistory,
-  },
-  {
-    name: "Contact",
-    path: "/contact",
-    icon: faUsers,
-  },
-];
+import { navList } from "@/utils/consts";
 
-function Navbar() {
-  const theme = useTheme();
-  const isDesktopMatches = useMediaQuery(theme.breakpoints.up("sm"));
+export function Navbar() {
   const router = useRouter();
 
   const handleChange = (_, newValue) => {
@@ -39,7 +12,7 @@ function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
       <Stack
         direction="row"
         sx={{
@@ -54,7 +27,7 @@ function Navbar() {
           textColor="inherit"
           indicatorColor="secondary"
         >
-          {NavList.map((item, index) => {
+          {navList.map((item, index) => {
             return (
               <Tab
                 value={item?.path}
@@ -69,8 +42,6 @@ function Navbar() {
           })}
         </Tabs>
       </Stack>
-    </Box>
+    </>
   );
 }
-
-export default Navbar;

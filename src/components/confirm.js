@@ -1,13 +1,13 @@
 import {
+  Button,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
-  Button,
+  DialogTitle,
 } from "@mui/material";
 
-function Confirm({ open, setOpen, setAgree, data }) {
+export function Confirm({ open, setOpen, setAgree, data }) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -23,7 +23,7 @@ function Confirm({ open, setOpen, setAgree, data }) {
   };
 
   return (
-    <div>
+    <>
       <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
         <DialogTitle>{data?.title}</DialogTitle>
         <DialogContent>
@@ -36,8 +36,6 @@ function Confirm({ open, setOpen, setAgree, data }) {
           <Button onClick={handleCancel}>Cancel</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
-
-export default Confirm;

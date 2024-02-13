@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  mode: "light",
+};
+
 const modeSlice = createSlice({
   name: "mode",
-  initialState: {
-    mode: "light",
-  },
+  initialState,
   reducers: {
     getMode: (state) => {
       if (typeof window != undefined) {

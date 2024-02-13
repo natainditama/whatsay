@@ -1,26 +1,26 @@
-import { Metadata } from "@components/index";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Box,
-  TextField,
-  Typography,
   Button,
-  Grid,
-  InputAdornment,
   CircularProgress,
   FormControl,
-  InputLabel,
-  Select,
   FormHelperText,
+  Grid,
+  InputAdornment,
+  InputLabel,
   MenuItem,
+  Select,
+  TextField,
+  Typography,
 } from "@mui/material";
-import Image from "next/image";
-import { useState, useMemo } from "react";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { addHistories } from "@redux/features/historySlice";
 import { parsePhoneNumber } from "libphonenumber-js";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { addHistories } from "@/redux/slices";
 
 export default function Home({ countries }) {
   const router = useRouter();
@@ -88,18 +88,19 @@ export default function Home({ countries }) {
           const phone =
             router.query?.to ??
             parsePhoneNumber(temp.telphone, temp.iso).formatInternational();
+            console.log(phone);
           dispatch(
             addHistories({
               ...temp,
               createAt: `${new Date()}`,
-              telphone: decodeURI(router.query?.to) ?? phone,
-            })
+              telphone: phone,
+            }),
           );
           window.open(
             `https://api.whatsapp.com/send?phone=${phone}&text=${temp.messages
               .split("\n")
               .join("%0a")}&source=&data`,
-            "_blank"
+            "_blank",
           );
           setTemp({ telphone: "", messages: "", isLoading: false });
           setError({});
@@ -110,7 +111,6 @@ export default function Home({ countries }) {
 
   return (
     <Box>
-      <Metadata />
       <Box component={`form`} autoComplete="off" onSubmit={handleSubmit}>
         <Grid container rowSpacing={2}>
           <Grid item xs={12}>

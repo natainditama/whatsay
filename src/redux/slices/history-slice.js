@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  histories: [],
+};
+
 export const historySlice = createSlice({
   name: "history",
-  initialState: {
-    histories: [],
-  },
+  initialState,
   reducers: {
     fetchHistories: (state) => {
       if (typeof window != undefined) {
