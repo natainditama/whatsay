@@ -1,5 +1,3 @@
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Box,
   Button,
@@ -14,13 +12,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { parsePhoneNumber } from "libphonenumber-js";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-
 import { addHistories } from "@/redux/slices";
+import { useDispatch } from "react-redux";
+import { useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Home({ countries }) {
   const router = useRouter();

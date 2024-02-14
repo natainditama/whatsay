@@ -1,5 +1,3 @@
-import { faPen, faTrashAlt, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Avatar,
   Box,
@@ -12,13 +10,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { parsePhoneNumber } from "libphonenumber-js";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { Modal } from "@/components/index";
+import { faPen, faTrashAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { deleteContact, getAllContact } from "@/redux/slices";
+import { useDispatch, useSelector } from "react-redux";
+import { parsePhoneNumber } from "libphonenumber-js";
+import { useEffect, useState } from "react";
+import { Modal } from "@/components/index";
+import { useRouter } from "next/router";
 
 export default function Contacts({ countries }) {
   const dispatch = useDispatch();

@@ -1,5 +1,3 @@
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   AppBar,
   Container,
@@ -10,9 +8,10 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
-
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navbar } from "@/components/index";
+import { useDispatch } from "react-redux";
 import { setMode } from "@/redux/slices";
 
 export function Header() {

@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { useRouter } from "next/router";
-
+import { Stack, Tab, Tabs, Typography } from "@mui/material";
 import { navList } from "@/utils/consts";
+import { useRouter } from "next/router";
 
 export function Navbar() {
   const router = useRouter();

@@ -13,13 +13,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { addContact, editContact } from "@/redux/slices";
 import { parsePhoneNumber } from "libphonenumber-js";
-import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-
-import { addContact, editContact } from "@/redux/slices";
+import Image from "next/image";
 
 export function Modal({ open, setOpen, data, countries }) {
   const dispatch = useDispatch();

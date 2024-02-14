@@ -1,5 +1,3 @@
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Accordion,
   AccordionDetails,
@@ -14,12 +12,13 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { Confirm } from "@/components/index";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchHistories, resetHistories } from "@/redux/slices";
+import { useDispatch, useSelector } from "react-redux";
+import { Confirm } from "@/components/index";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const StyledAccordion = styled((props) => (
   <Accordion disableGutters elevation={0} {...props} />

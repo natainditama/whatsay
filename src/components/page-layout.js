@@ -1,16 +1,15 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import Container from "@mui/material/Container";
-import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Header } from "@/components/index";
-import { getDesignTokens } from "@/lib/theme";
 import { getMode } from "@/redux/slices/mode-slice";
+import Container from "@mui/material/Container";
+import { getDesignTokens } from "@/lib/theme";
+import { Header } from "@/components/index";
+import { useEffect, useMemo } from "react";
 
 export function PageLayout({ children }) {
   const dispatch = useDispatch();
   const mode = useSelector(({ mode }) => mode);
-  const theme = useMemo(() => createTheme(getDesignTokens(mode )), [mode]);
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   useEffect(() => {
     dispatch(getMode());
