@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "husky"
+    "postinstall": "husky",
+    "format": "prettier \"src/**/*.+(ts|js|jsx|tsx)\" --write"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -31,5 +32,21 @@
     "prettier": "^3.2.5",
     "prettier-plugin-sort-imports": "^1.8.3",
     "prettier-plugin-sort-json": "^3.1.0"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,js,jsx,tsx,css}": [
+      "prettier --ignore-path .gitignore --write"
+    ]
+  },
+  "prettier": {
+    "endOfLine": "auto",
+    "sortingMethod": "lineLength",
+    "plugins": [
+      "prettier-plugin-sort-json",
+      "prettier-plugin-sort-imports"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "next/core-web-vitals"
   }
 }
