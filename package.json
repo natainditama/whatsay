@@ -51,7 +51,14 @@
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
+    ],
+    "rules": {
+      "subject-case": [
+        2,
+        "always",
+        "lower-case"
+      ]
+    }
   },
   "eslintConfig": {
     "extends": "next/core-web-vitals"
