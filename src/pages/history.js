@@ -2,7 +2,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
   Button,
   Divider,
   IconButton,
@@ -14,10 +13,11 @@ import {
 } from "@mui/material";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { fetchHistories, resetHistories } from "@/redux/slices";
 import { useDispatch, useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
 import { Confirm } from "@/components/index";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const StyledAccordion = styled((props) => (
@@ -49,7 +49,7 @@ export default function History() {
   };
 
   return (
-    <Box>
+    <>
       <Confirm
         open={open}
         setOpen={setOpen}
@@ -65,12 +65,14 @@ export default function History() {
         alignItems="center"
         sx={{ pt: 2, pb: 4 }}
       >
-        <Typography color="primary" variant="h5">
-          My History
-          <Typography color="text.primary" variant="body2">
+        <div>
+          <Typography color="primary" variant="h6" fontWeight={"500"} mb={0.2}>
+            My History
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
             List your recent chat history
           </Typography>
-        </Typography>
+        </div>
         <Button
           color="error"
           disabled={historyList.length === 0}
@@ -78,7 +80,7 @@ export default function History() {
             setOpen(true);
           }}
         >
-          Delete Histories
+          Delete histories
         </Button>
       </Stack>
       {historyList.length === 0 && (
@@ -88,7 +90,7 @@ export default function History() {
       )}
       {historyList.map((list, index) => {
         return (
-          <Box key={index}>
+          <Fragment key={index}>
             <StyledAccordion
               disableGutters
               expanded={expanded === index}
@@ -113,12 +115,12 @@ export default function History() {
                         })
                       }
                     >
-                      <i className="fab fa-whatsapp"></i>
+                      <FontAwesomeIcon icon={faWhatsapp} />
                     </IconButton>
                   }
                 >
                   <ListItemText
-                    primary={list.telphone}
+                    primary={decodeURI(list.telphone)}
                     secondary={
                       <Typography
                         noWrap
@@ -138,9 +140,9 @@ export default function History() {
               </AccordionDetails>
             </StyledAccordion>
             <Divider />
-          </Box>
+          </Fragment>
         );
       })}
-    </Box>
+    </>
   );
 }
