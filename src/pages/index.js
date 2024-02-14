@@ -88,7 +88,7 @@ export default function Home({ countries }) {
           const phone =
             router.query?.to ??
             parsePhoneNumber(temp.telphone, temp.iso).formatInternational();
-            console.log(phone);
+          console.log(phone);
           dispatch(
             addHistories({
               ...temp,
@@ -224,7 +224,7 @@ export default function Home({ countries }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const res = await fetch(`https://restcountries.com/v2/all`);
     const countries = await res.json();
