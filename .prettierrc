@@ -1,14 +1,8 @@
 {
-  "importOrder": [
-    "<THIRD_PARTY_MODULES>",
-    "<BUILTIN_MODULES>",
-    "",
-    "^@/(.*)$",
-    "^[./]"
-  ],
+  "sortingMethod": "lineLength",
+  "endOfLine": "auto",
   "plugins": [
     "prettier-plugin-sort-json",
-    "@ianvs/prettier-plugin-sort-imports"
-  ],
-  "endOfLine": "auto"
+    "prettier-plugin-sort-imports"
+  ]
 }
