@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   Button,
   IconButton,
   List,
@@ -12,6 +11,7 @@ import {
 } from "@mui/material";
 import { faPen, faTrashAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { deleteContact, getAllContact } from "@/redux/slices";
 import { useDispatch, useSelector } from "react-redux";
 import { parsePhoneNumber } from "libphonenumber-js";
@@ -31,7 +31,7 @@ export default function Contacts({ countries }) {
   }, [dispatch]);
 
   return (
-    <Box>
+    <>
       <Modal
         open={open}
         setOpen={setOpen}
@@ -44,12 +44,14 @@ export default function Contacts({ countries }) {
         alignItems="center"
         sx={{ pt: 2 }}
       >
-        <Typography color="primary" variant="h5">
-          My Contacts
+        <div>
+          <Typography color="primary" variant="h5" fontWeight={"500"} mb={0.2}>
+            My Contacts
+          </Typography>
           <Typography color="text.primary" variant="body2">
             List your contacts here
           </Typography>
-        </Typography>
+        </div>
         <Button
           variant="outlined"
           onClick={() => {
@@ -60,25 +62,9 @@ export default function Contacts({ countries }) {
             });
           }}
         >
-          Add New Contact
+          Create contact
         </Button>
       </Stack>
-
-      {/* <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography color="primary" variant="h5"></Typography>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            setOpen(true);
-            setDataModal({
-              title: "Add Contact",
-              type: "add",
-            });
-          }}
-        >
-          Add New Contact
-        </Button>
-      </Stack> */}
       <List>
         {!contactList.length && (
           <Typography pt={12} align="center" color="info">
@@ -90,7 +76,7 @@ export default function Contacts({ countries }) {
             <ListItem
               key={index}
               secondaryAction={
-                <Box>
+                <>
                   <IconButton
                     aria-label="delete"
                     onClick={() => dispatch(deleteContact(data.id))}
@@ -131,9 +117,9 @@ export default function Contacts({ countries }) {
                       });
                     }}
                   >
-                    <i className="fab fa-whatsapp"></i>
+                    <FontAwesomeIcon icon={faWhatsapp} />
                   </IconButton>
-                </Box>
+                </>
               }
             >
               <ListItemAvatar>
@@ -152,7 +138,7 @@ export default function Contacts({ countries }) {
           );
         })}
       </List>
-    </Box>
+    </>
   );
 }
 
