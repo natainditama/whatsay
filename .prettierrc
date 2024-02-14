@@ -1,8 +1,0 @@
-{
-  "sortingMethod": "lineLength",
-  "endOfLine": "auto",
-  "plugins": [
-    "prettier-plugin-sort-json",
-    "prettier-plugin-sort-imports"
-  ]
-}
