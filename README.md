@@ -1,34 +1,132 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+  <h1>Whatsay</h1>  
+  <p>
+    WhatsApp contact management 
+  </p>
 
-First, run the development server:
+<!-- Badges -->
+<p>
+  <a href="https://github.com/natainditama/whatsay/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/natainditama/whatsay" alt="contributors" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay/issues/">
+    <img src="https://img.shields.io/github/issues/natainditama/whatsay" alt="open issues" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay/network/members">
+    <img src="https://badgen.net/github/forks/natainditama/whatsay" alt="forks" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay/graphs/commit-activity">
+    <img src="https://badgen.net/github/commits/natainditama/whatsay" alt="commits count" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay/stargazers">
+    <img src="https://badgen.net/github/stars/natainditama/whatsay" alt="stars" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/natainditama/whatsay.svg" alt="license" />
+  </a>
+  <a href="https://github.com/natainditama/whatsay">
+    <img src="https://img.shields.io/github/last-commit/natainditama/whatsay" alt="last update" />
+  </a>
+</p>
+   
+  <h4>
+    <a href="https://github.com/natainditama/whatsay/">View Demo</a>
+    <span> · </span>
+    <a href="https://github.com/natainditama/whatsay">Documentation</a>
+    <span> · </span>
+    <a href="https://github.com/natainditama/whatsay/issues/">Report Bug</a>
+    <span> · </span>
+    <a href="https://github.com/natainditama/whatsay/issues/">Request Feature</a>
+  </h4>
+</div>
+
+<br />
+
+<div align="center"> 
+  <img src=".github/screnshot.png" alt="screenshot" />
+</div>
+
+<br />
+
+<!-- About the Project -->
+## 📝 About the Project
+
+<!-- Features -->
+### 🌟 Features
+
+This project includes the following features:
+
+- Add new contact
+- Message history
+- International number
+- Dark mode toggle
+- Edit/Delete contact
+- Integration with WhatsApp
+
+<!-- Color Reference -->
+### 🎨 Color Reference
+
+| Color            | Hex                                                              |
+| ---------------- | ---------------------------------------------------------------- |
+| Primary Color    | ![#16A34A](https://via.placeholder.com/10/16A34A?text=+) #16A34A |
+| Secondary Color  | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
+| Background Color | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
+| Text Color       | ![#09090B](https://via.placeholder.com/10/09090B?text=+) #09090B |
+
+<!-- Getting Started -->
+## 🚀 Getting Started
+
+<!-- Prerequisites -->
+### 🔧 Prerequisites
+
+- [Node.js](http://nodejs.org/)
+
+<!-- Run Locally -->
+### 🏃 Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/natainditama/whatsay.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+  cd whatsay
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Install dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm install
+```
 
-## Learn More
+Start the server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- Contributing -->
+## 👋 Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<a href="https://github.com/natainditama/whatsay/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=natainditama/whatsay" />
+</a><br/>
 
-## Deploy on Vercel
+Contributions are always welcome!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+See [contributing.md](https://github.com/natainditama/whatsay/blob/main/.github/CONTRIBUTING.md) for ways to get started.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- License -->
+## ⚠️ License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/natainditama/whatsay/blob/main/LICENSE) file for details
+
+<!-- Contact -->
+## 🤝 Contact
+Nata Inditama - [natainditama](https://linkedin.com/in/natainditama/) - natainditama.dev@gmail.com
+
+Project Link: [https://github.com/natainditama/whatsay](https://github.com/natainditama/whatsay)
