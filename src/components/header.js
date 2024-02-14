@@ -45,7 +45,9 @@ export function Header() {
                 width: "100%",
               }}
             >
-              <Typography variant="h5">Whatsay</Typography>
+              <Typography variant="h5" fontWeight={"700"}>
+                Whatsay
+              </Typography>
               <IconButton
                 size="large"
                 aria-label="search"

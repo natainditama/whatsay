@@ -45,10 +45,10 @@ export default function Contacts({ countries }) {
         sx={{ pt: 2 }}
       >
         <div>
-          <Typography color="primary" variant="h5" fontWeight={"500"} mb={0.2}>
+          <Typography color="primary" variant="h6" fontWeight={"500"} mb={0.2}>
             My Contacts
           </Typography>
-          <Typography color="text.primary" variant="body2">
+          <Typography color="text.secondary" variant="body2">
             List your contacts here
           </Typography>
         </div>
